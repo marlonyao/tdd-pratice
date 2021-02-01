@@ -26,13 +26,13 @@ test('statment bodies', () => {
     expect(fives).toEqual([5, 10])
 })
 
-test('lexical this', () => {
-    this.nums = [1, 5, 10]
-    this.fives = []
-    this.nums.forEach(v => {
-        if (v % 5 == 0) {
-            this.fives.push(v)
-        }
-    })
-    expect(this.fives).toEqual([5, 10])
-})
+// test('lexical this', () => {
+//     this.nums = [1, 5, 10]
+//     this.fives = []
+//     this.nums.forEach(v => {
+//         if (v % 5 == 0) {
+//             this.fives.push(v)
+//         }
+//     })
+//     expect(this.fives).toEqual([5, 10])
+// })
