@@ -28,7 +28,7 @@ test('class inheritance', () => {
         }
     }
 
-    class Rectange {
+    class Rectange extends Shape {
         constructor(id, x, y, width, height) {
             super(id, x, y)
             this.width = width
@@ -43,3 +43,4 @@ test('class inheritance', () => {
     expect(rec.width).toBe(10)
     expect(rec.height).toBe(5)
 })
+
