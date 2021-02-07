@@ -43,4 +43,3 @@ test('class inheritance', () => {
     expect(rec.width).toBe(10)
     expect(rec.height).toBe(5)
 })
-
