@@ -28,7 +28,7 @@ test('class inheritance', () => {
         }
     }
 
-    class Rectange extends Shape {
+    class Rectangle extends Shape {
         constructor(id, x, y, width, height) {
             super(id, x, y)
             this.width = width
@@ -36,7 +36,7 @@ test('class inheritance', () => {
         }
     }
 
-    let rec = new Rectange('id2', 1, 2, 10, 5)
+    let rec = new Rectangle('id2', 1, 2, 10, 5)
     expect(rec.id).toBe('id2')
     expect(rec.x).toBe(1)
     expect(rec.y).toBe(2)
@@ -99,4 +99,96 @@ test('class inheritance, from expressions', () => {
     expect(rect.y).toBe(42)
     expect(rect.z).toBe(1000)
     expect(rect.color).toBe('red')
+})
+
+test('base class access', () => {
+    class Shape {
+        constructor(id, x, y) {
+            this.id = id
+            this.x = x
+            this.y = y
+        }
+        toString() {
+            return `Shape(${this.id})`
+        }
+    }
+
+    class Rectangle extends Shape {
+        constructor(id, x, y, width, height) {
+            super(id, x, y)
+            this.width = width
+            this.height = height
+        }
+        toString() {
+            // 通过 super.xxxMethod() 访问父类的方法
+            // super.toString() 表示调用 Shape.toString() 方法
+            return 'Rectangle -> ' + super.toString()
+        }
+    }
+
+    class Circle extends Shape {
+        constructor(id, x, y, radius) {
+            super(id, x, y)
+            this.radius = radius
+        }
+        toString() {
+            // 通过 super.xxxMethod() 访问父类的方法
+            // super.toString() 表示调用 Shape.toString() 方法
+            return 'Circle -> ' + super.toString()
+        }
+    }
+
+    let rec = new Rectangle('rec1', 1, 2, 100, 50)
+    expect(rec.toString()).toBe('Rectangle -> Shape(rec1)')
+    let circle = new Circle('circle1', 1, 1, 50)
+    expect(circle.toString()).toBe('Circle -> Shape(circle1)')
+})
+
+test('static members', () => {
+    class Shape {
+        constructor(id, x, y) {
+            this.id = id
+            this.x = x
+            this.y = y
+        }
+    }
+    class Rectangle extends Shape {
+        constructor(id, x, y, width, height) {
+            super(id, x, y)
+            this.width = width
+            this.height = height
+        }
+        // 通过static关键字声明静态方法
+        static defaultRectangle() {
+            return new Rectangle('default', 0, 0, 100, 100)
+        }
+    }
+
+    let defRectangle = Rectangle.defaultRectangle()
+    expect(defRectangle.id).toBe('default')
+    expect(defRectangle.width).toBe(100)
+    expect(defRectangle.height).toBe(100)
+})
+
+test('getter setter', () => {
+    class Rectangle {
+        constructor(width, height) {
+            this._width = width
+            this._height = height
+        }
+
+        set width(width) { this._width = width }
+        get width() { return this._width }
+        set height(height) { this._height = height }
+        get height() { return this._height }
+        get area() { return this._width * this._height }
+    }
+
+    let rec = new Rectangle(100, 50)
+    expect(rec.width).toBe(100)
+    rec.width = 200
+    expect(rec.width).toBe(200)
+    rec.height = 100
+    expect(rec.height).toBe(100)
+    expect(rec.area).toBe(20000)
 })
