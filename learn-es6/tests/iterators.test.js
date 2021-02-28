@@ -23,3 +23,4 @@ test('iterator & for-of operator', () => {
     }
     expect(fibArray).toEqual([1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
 })
+
