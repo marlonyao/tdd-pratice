@@ -16,5 +16,6 @@ class SolutionTest {
         assertThat(solution.minArray(new int[]{3, 1, 2})).isEqualTo(1);
         assertThat(solution.minArray(new int[]{3, 4, 5, 1, 2})).isEqualTo(1);
         assertThat(solution.minArray(new int[]{2, 2, 2, 0, 1})).isEqualTo(0);
+        assertThat(solution.minArray(new int[]{1, 3, 5})).isEqualTo(1);
     }
 }
