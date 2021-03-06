@@ -1,17 +1,14 @@
 package marlonyao.leetcode.lcof.issue03;
 
-import java.util.HashSet;
-import java.util.Set;
-
 class Solution {
     public int findRepeatNumber(int[] nums) {
-        Set<Integer> set = new HashSet<Integer>();
+        int[] set = new int[nums.length];
 
         for (int num : nums) {
-            if (set.contains(num)) {
+            if (set[num] > 0) {
                 return num;
             }
-            set.add(num);
+            set[num] = 1;
         }
         return -1;
     }
