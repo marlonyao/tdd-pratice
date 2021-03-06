@@ -2,33 +2,39 @@ package marlonyao.leetcode.lcof.issue07;
 
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder.length == 0) {
+        return buildTree(preorder, 0, preorder.length, inorder, 0, inorder.length);
+    }
+
+    private TreeNode buildTree(
+            int[] preorder, int preorderStartIndex, int preorderEndIndex,
+            int[] inorder, int inorderStartIndex, int inorderEndIndex) {
+        if (preorderEndIndex == preorderStartIndex) {
             return null;
         }
-        int root = preorder[0];
 
-        // find root index
-        int rootIndex = findRootIndex(root, inorder);
-        // (0 .. rootIndex-1) rootIndex (rootIndex+1,...)
-        int[] inorderLeftTree = new int[rootIndex];
-        System.arraycopy(inorder, 0, inorderLeftTree, 0, inorderLeftTree.length);
-        int[] inorderRightTree = new int[inorder.length - rootIndex - 1];
-        System.arraycopy(inorder, rootIndex+1, inorderRightTree, 0, inorderRightTree.length);
+        int root = preorder[preorderStartIndex];
 
-        int[] preorderLeftTree = new int[rootIndex];
-        // (1 .. rootIndex) (rootIndex+1,....)
-        System.arraycopy(preorder, 1, preorderLeftTree, 0, preorderLeftTree.length);
-        int[] preorderRightTree = new int[preorder.length - rootIndex - 1];
-        System.arraycopy(preorder, rootIndex+1, preorderRightTree, 0, preorderRightTree.length);
+        int rootInorderIndex = findIndex(root, inorder, inorderStartIndex, inorderEndIndex);
+        int leftTreeSize = rootInorderIndex - inorderStartIndex;
 
         TreeNode result = new TreeNode(root);
-        result.left = buildTree(preorderLeftTree, inorderLeftTree);
-        result.right = buildTree(preorderRightTree, inorderRightTree);
+        result.left = buildTree(preorder,
+                preorderStartIndex + 1,
+                preorderStartIndex + leftTreeSize + 1,
+                inorder,
+                inorderStartIndex,
+                rootInorderIndex);
+        result.right = buildTree(preorder,
+                preorderStartIndex + leftTreeSize + 1,
+                preorderEndIndex,
+                inorder,
+                rootInorderIndex + 1,
+                inorderEndIndex);
         return result;
     }
 
-    private int findRootIndex(int root, int[] inorder) {
-        for (int i = 0; i < inorder.length; i++) {
+    private int findIndex(int root, int[] inorder, int inorderStartIndex, int inorderEndIndex) {
+        for (int i = inorderStartIndex; i < inorderEndIndex; i++) {
             if (inorder[i] == root) {
                 return i;
             }
