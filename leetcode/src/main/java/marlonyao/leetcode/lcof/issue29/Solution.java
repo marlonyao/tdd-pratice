@@ -1,22 +1,22 @@
 package marlonyao.leetcode.lcof.issue29;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     public int[] spiralOrder(int[][] matrix) {
         if (matrix.length == 0) {
             return new int[0];
         }
-        List<Integer> result = new ArrayList<>();
-        spiralOrder(result, matrix, 0, matrix.length - 1, 0, matrix[0].length - 1);
-        return toIntArray(result);
+        IntArray result = new IntArray(matrix.length * matrix[0].length);
+        int startRow = 0, endRow = matrix.length - 1;
+        int startCol = 0, endCol = matrix[0].length - 1;
+        while (startRow <= endRow && startCol <= endCol) {
+            outMost(result, matrix, startRow, endRow, startCol, endCol);
+            startRow += 1; endRow -= 1;
+            startCol += 1; endCol -= 1;
+        }
+        return result.array;
     }
 
-    public void spiralOrder(List<Integer> result, int[][] matrix, int startRow, int endRow, int startCol, int endCol) {
-        if (startRow > endRow || startCol > endCol) {
-            return;
-        }
+    public void outMost(IntArray result, int[][] matrix, int startRow, int endRow, int startCol, int endCol) {
         for (int j = startCol; j <= endCol; j++) { // first row
             result.add(matrix[startRow][j]);
         }
@@ -33,16 +33,18 @@ class Solution {
                 result.add(matrix[i][startCol]);
             }
         }
-
-        spiralOrder(result, matrix, startRow + 1, endRow - 1, startCol + 1, endCol - 1);
     }
 
-    private int[] toIntArray(List<Integer> list) {
-        int[] result = new int[list.size()];
-        int i = 0;
-        for (Integer value : list) {
-            result[i++] = value;
+    static class IntArray {
+        int[] array;
+        int index;
+
+        public IntArray(int size) {
+            this.array = new int[size];
         }
-        return result;
+
+        public void add(int value) {
+            array[index++] = value;
+        }
     }
 }
