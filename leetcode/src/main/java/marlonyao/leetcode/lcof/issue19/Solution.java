@@ -15,12 +15,8 @@ class Solution {
 
         if (pIndex + 1 < p.length() && p.charAt(pIndex + 1) == '*') {
             // * 号匹配，可以匹配 0 到 多次
-            do {
-                if (match(s, sIndex, p, pIndex + 2)) {
-                    return true;
-                }
-            } while (sIndex < s.length() && matchChar(s.charAt(sIndex++), p.charAt(pIndex)));
-            return false;
+            return match(s, sIndex, p, pIndex + 2) ||
+                    (sIndex < s.length() && matchChar(s.charAt(sIndex), p.charAt(pIndex)) && match(s, sIndex+1, p, pIndex));
         }
         if (sIndex < s.length() && matchChar(s.charAt(sIndex), p.charAt(pIndex))) {
             // 单字符一一匹配

@@ -22,5 +22,6 @@ class SolutionTest {
         assertThat(solution.isMatch("ab", "a.")).isTrue();
         assertThat(solution.isMatch("aab", "c*a*b")).isTrue();
         assertThat(solution.isMatch("mississippi", "mis*is*p*.")).isFalse();
+        assertThat(solution.isMatch("ab", ".*c")).isFalse();
     }
 }
