@@ -42,5 +42,8 @@ class SolutionTest {
         assertThat(solution.isNumber(" . ")).isFalse();
         assertThat(solution.isNumber(" 3. ")).isTrue();
         assertThat(solution.isNumber(" .e1 ")).isFalse();
+        assertThat(solution.isNumber(".-4")).isFalse();
+        assertThat(solution.isNumber("+.8")).isTrue();
+
     }
 }
