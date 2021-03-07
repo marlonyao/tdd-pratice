@@ -1,6 +1,6 @@
 package marlonyao.leetcode.lcof.issue06;
 
-public class ListNode {
+class ListNode {
     int val;
     ListNode next;
 

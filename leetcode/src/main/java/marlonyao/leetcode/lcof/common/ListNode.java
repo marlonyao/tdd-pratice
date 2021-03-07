@@ -1,14 +1,11 @@
-package marlonyao.leetcode.lcof.issue18;
+package marlonyao.leetcode.lcof.common;
 
 import java.util.Objects;
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
+public class ListNode {
+    public int val;
+    public ListNode next;
+    public ListNode(int x) { val = x; }
 
     @Override
     public boolean equals(Object o) {
@@ -30,5 +27,18 @@ class ListNode {
                 "val=" + val +
                 ", next=" + next +
                 '}';
+    }
+
+    public static ListNode makeList(int... values) {
+        return makeList(values, 0, values.length);
+    }
+
+    private static ListNode makeList(int[] values, int startIndex, int endIndex) {
+        if (startIndex == endIndex) {
+            return null;
+        }
+        ListNode head = new ListNode(values[startIndex]);
+        head.next = makeList(values, startIndex + 1, endIndex);
+        return head;
     }
 }
