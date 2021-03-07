@@ -2,7 +2,7 @@ package marlonyao.leetcode.lcof.issue07;
 
 import java.util.Objects;
 
-public class TreeNode {
+class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
