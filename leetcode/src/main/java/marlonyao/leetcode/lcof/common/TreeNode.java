@@ -1,12 +1,6 @@
 package marlonyao.leetcode.lcof.common;
 
-import apple.laf.JRSUIUtils;
-import org.assertj.core.util.Lists;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class TreeNode {
     public int val;
@@ -31,10 +25,12 @@ public class TreeNode {
         Iterator<Integer> valuesItor = Arrays.asList(values).iterator();
 
         TreeNode root = new TreeNode(valuesItor.next());
-        List<TreeNode> layer = Lists.newArrayList(root);
+        List<TreeNode> layer = new ArrayList<>();
+        layer.add(root);
+
         outer:
         while (valuesItor.hasNext()) {
-            List<TreeNode> nextLayer = Lists.newArrayList();
+            List<TreeNode> nextLayer = new ArrayList<>();
             for (TreeNode node : layer) {
                 Integer left = valuesItor.hasNext() ? valuesItor.next() : null;
                 Integer right = valuesItor.hasNext() ? valuesItor.next() : null;
