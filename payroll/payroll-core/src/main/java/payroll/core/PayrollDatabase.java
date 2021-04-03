@@ -6,4 +6,6 @@ public interface PayrollDatabase {
     Employee getEmployee(int empId);
 
     void deleteEmployee(int empId);
+
+    Employee getEmployeeByMemberId(int memberId);
 }

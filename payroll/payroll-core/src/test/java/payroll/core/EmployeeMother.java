@@ -21,6 +21,7 @@ public class EmployeeMother {
 
     private static Employee create(int empId) {
         return new Employee(empId, "Bob", "Home")
-                .setMethod(new HoldMethod());
+                .setMethod(new HoldMethod())
+                .setAffiliation(new NoAffiliation());
     }
 }

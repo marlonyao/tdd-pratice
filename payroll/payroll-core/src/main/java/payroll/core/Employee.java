@@ -1,7 +1,5 @@
 package payroll.core;
 
-import java.util.Objects;
-
 public class Employee {
     private final Integer empId;
     private final String name;
@@ -9,6 +7,7 @@ public class Employee {
     private PaymentClassification classification;
     private PaymentSchedule schedule;
     private PaymentMethod method;
+    private Affiliation affiliation;
 
     public Employee(Integer empId, String name, String address) {
         this.empId = empId;
@@ -53,5 +52,14 @@ public class Employee {
 
     public PaymentMethod getMethod() {
         return method;
+    }
+
+    public Employee setAffiliation(Affiliation affiliation) {
+        this.affiliation = affiliation;
+        return this;
+    }
+
+    public Affiliation getAffiliation() {
+        return affiliation;
     }
 }
