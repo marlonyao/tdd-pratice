@@ -33,7 +33,7 @@ public class AddTimeCardTest {
 
     @Test
     public void should_throw_exception_given_not_hourly_employee() {
-        database.addEmployee(createSalariedEmployee(empId));
+        database.addEmployee(EmployeeMother.salaried(empId));
 
         assertThatThrownBy(() -> transaction.execute())
                 .isInstanceOf(ApplicationException.class)
@@ -42,26 +42,12 @@ public class AddTimeCardTest {
 
     @Test
     public void should_add_time_card() {
-        database.addEmployee(createHourlyEmployee(empId));
+        database.addEmployee(EmployeeMother.hourly(empId));
 
         transaction.execute();
 
         Employee employee = database.getEmployee(empId);
         HourlyClassification classification = (HourlyClassification) employee.getClassification();
         assertThat(classification.getTimeCard(date).getHours()).isCloseTo(7.0, offset(0.01));
-    }
-
-    private Employee createHourlyEmployee(int empId) {
-        return new Employee(empId, "Bob", "Home")
-                .setClassification(new HourlyClassification(10.0))
-                .setSchedule(new WeeklySchedule())
-                .setMethod(new HoldMethod());
-    }
-
-    private Employee createSalariedEmployee(int empId) {
-        return new Employee(empId, "Bob", "Home")
-                .setClassification(new SalariedClassification(1000))
-                .setSchedule(new MonthlySchedule())
-                .setMethod(new HoldMethod());
     }
 }

@@ -9,18 +9,11 @@ public class DeleteEmployeeTest {
     public void should_delete_employee() {
         int empId = 1;
         PayrollDatabase payrollDatabase = new MemoryPayrollDatabase();
-        payrollDatabase.addEmployee(createSalariedEmployee(empId));
+        payrollDatabase.addEmployee(EmployeeMother.salaried(empId));
 
         DeleteEmployeeTransaction transaction = new DeleteEmployeeTransaction(empId, payrollDatabase);
         transaction.execute();
 
         assertThat(payrollDatabase.getEmployee(empId)).isNull();
-    }
-
-    private Employee createSalariedEmployee(int empId) {
-        return new Employee(empId, "Bob", "Home")
-                .setClassification(new SalariedClassification(1000))
-                .setSchedule(new MonthlySchedule())
-                .setMethod(new HoldMethod());
     }
 }
