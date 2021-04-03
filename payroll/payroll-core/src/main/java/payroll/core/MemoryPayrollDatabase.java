@@ -15,4 +15,9 @@ public class MemoryPayrollDatabase implements PayrollDatabase {
     public Employee getEmployee(int empId) {
         return employees.get(empId);
     }
+
+    @Override
+    public void deleteEmployee(int empId) {
+        employees.remove(empId);
+    }
 }

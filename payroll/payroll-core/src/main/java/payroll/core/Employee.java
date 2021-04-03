@@ -28,24 +28,27 @@ public class Employee {
         return address;
     }
 
-    public void setClassification(PaymentClassification classification) {
+    public Employee setClassification(PaymentClassification classification) {
         this.classification = classification;
+        return this;
     }
 
     public PaymentClassification getClassification() {
         return classification;
     }
 
-    public void setSchedule(PaymentSchedule schedule) {
+    public Employee setSchedule(PaymentSchedule schedule) {
         this.schedule = schedule;
+        return this;
     }
 
     public PaymentSchedule getSchedule() {
         return schedule;
     }
 
-    public void setMethod(PaymentMethod method) {
+    public Employee setMethod(PaymentMethod method) {
         this.method = method;
+        return this;
     }
 
     public PaymentMethod getMethod() {

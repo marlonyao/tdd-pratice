@@ -1,6 +1,6 @@
 package payroll.core;
 
-public abstract class AddEmployeeTransaction {
+public abstract class AddEmployeeTransaction extends Transaction {
     protected final int empId;
     protected final String name;
     protected final String address;
@@ -13,6 +13,7 @@ public abstract class AddEmployeeTransaction {
         this.payrollDatabase = payrollDatabase;
     }
 
+    @Override
     public void execute() {
         Employee employee = new Employee(empId, name, address);
         employee.setClassification(getClassification());
