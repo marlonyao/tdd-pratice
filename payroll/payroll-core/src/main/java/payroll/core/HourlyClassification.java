@@ -8,9 +8,13 @@ public class HourlyClassification extends PaymentClassification {
     private double hourlyRate;
     private Map<LocalDate, TimeCard> timeCards = new LinkedHashMap<>();
 
-
     public HourlyClassification(double hourlyRate) {
         this.hourlyRate = hourlyRate;
+    }
+
+    public HourlyClassification setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+        return this;
     }
 
     public double getHourlyRate() {
@@ -25,4 +29,5 @@ public class HourlyClassification extends PaymentClassification {
     public TimeCard getTimeCard(LocalDate date) {
         return timeCards.get(date);
     }
+
 }

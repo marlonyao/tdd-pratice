@@ -29,4 +29,8 @@ public class MemoryPayrollDatabase implements PayrollDatabase {
                     && ((UnionAffiliation) affiliation).getMemberId() == memberId;
         }).findFirst().orElse(null);
     }
+
+    public void clear() {
+        employees.clear();
+    }
 }

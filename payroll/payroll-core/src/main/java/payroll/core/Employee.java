@@ -2,8 +2,8 @@ package payroll.core;
 
 public class Employee {
     private final Integer empId;
-    private final String name;
-    private final String address;
+    private String name;
+    private String address;
     private PaymentClassification classification;
     private PaymentSchedule schedule;
     private PaymentMethod method;
@@ -61,5 +61,15 @@ public class Employee {
 
     public Affiliation getAffiliation() {
         return affiliation;
+    }
+
+    public Employee setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Employee setAddress(String address) {
+        this.address = address;
+        return this;
     }
 }
