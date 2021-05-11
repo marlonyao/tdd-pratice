@@ -2,96 +2,34 @@ package marlonyao.leetcode.main.issue004;
 
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int i = 0, j = 0;
-        MedianValue medianValue = MedianValue.create(nums1.length + nums2.length);
-        for (; i < nums1.length && j < nums2.length; ) {
-            if (nums1[i] < nums2[j]) {
-                i++;
-                if (medianValue.record(nums1[i - 1], i + j - 1)) {
-                    break;
-                }
-            } else {
-                j++;
-                if (medianValue.record(nums2[j - 1], i + j - 1)) {
-                    break;
-                }
-            }
+        int len = nums1.length + nums2.length;
+        if (len % 2 == 0) {
+            return (findNth(nums1, nums2, len / 2) + findNth(nums1, nums2, len / 2 + 1)) / 2.0;
         }
-        for (; i < nums1.length; ) {
-            i++;
-            if (medianValue.record(nums1[i - 1], i + j - 1)) {
-                break;
-            }
-        }
-        for (; j < nums2.length; ) {
-            j++;
-            if (medianValue.record(nums2[j - 1], i + j - 1)) {
-                break;
-            }
-        }
-
-        return medianValue.result();
+        return findNth(nums1, nums2, len / 2 + 1);
     }
 
-    static abstract class MedianValue {
-        int length;
-
-        public MedianValue(int length) {
-            this.length = length;
-        }
-
-        static MedianValue create(int length) {
-            if (length % 2 == 0) {
-                return new EvenMedianValue(length);
-            }
-            return new OddMedianValue(length);
-        }
-
-        public abstract boolean record(int value, int pos);
-
-        public abstract double result();
+    int findNth(int[] a, int[] b, int nth) {
+        return findNth(a, 0, a.length - 1, b, 0, b.length - 1, nth);
     }
 
-    static class EvenMedianValue extends MedianValue {
-        int value1;
-        int value2;
-
-        public EvenMedianValue(int length) {
-            super(length);
+    int findNth(int[] a, int aStart, int aEnd, int[] b, int bStart, int bEnd, int nth) {
+        if (aStart > aEnd) {
+            return b[bStart + nth - 1];
+        }
+        if (bStart > bEnd) {
+            return a[aStart + nth - 1];
+        }
+        if (nth == 1) {
+            return a[aStart] < b[bStart] ? a[aStart] : b[bStart];
         }
 
-        public boolean record(int value, int pos) {
-            if (pos == length / 2) {
-                value2 = value;
-                return true;
-            } else if (pos == length / 2 - 1) {
-                value1 = value;
-            }
-            return false;
-        }
-
-        public double result() {
-            return (value1 + value2) / 2.0;
-        }
-    }
-
-    static class OddMedianValue extends MedianValue {
-        private int value1;
-
-        public OddMedianValue(int length) {
-            super(length);
-        }
-
-        public boolean record(int value, int pos) {
-            if (pos == length / 2) {
-                value1 = value;
-                return true;
-            }
-            return false;
-        }
-
-        public double result() {
-            return value1;
+        int aHalf = Math.min(nth / 2, aEnd - aStart + 1);
+        int bHalf = Math.min(nth / 2, bEnd - bStart + 1);
+        if (a[aStart + aHalf - 1] < b[bStart + bHalf - 1]) {
+            return findNth(a, aStart + aHalf, aEnd, b, bStart, bEnd, nth - aHalf);
+        } else {
+            return findNth(a, aStart, aEnd, b, bStart + bHalf, bEnd, nth - bHalf);
         }
     }
 }

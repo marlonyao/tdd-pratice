@@ -13,5 +13,7 @@ class SolutionTest {
         assertThat(solution.findMedianSortedArrays(new int[]{0, 0}, new int[]{0, 0})).isEqualTo(0);
         assertThat(solution.findMedianSortedArrays(new int[]{}, new int[]{1})).isEqualTo(1);
         assertThat(solution.findMedianSortedArrays(new int[]{2}, new int[]{})).isEqualTo(2);
+        assertThat(solution.findMedianSortedArrays(new int[]{1}, new int[]{2, 3, 4, 5, 6})).isEqualTo(3.5);
+        assertThat(solution.findMedianSortedArrays(new int[]{4}, new int[]{1, 2, 3, 5, 6})).isEqualTo(3.5);
     }
 }
