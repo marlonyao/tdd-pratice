@@ -70,7 +70,7 @@ public class Money implements Comparable<Money> {
         if (scale <= 2) {
             return unscaledValue * powOf10(2 - scale);
         }
-        return unscaledValue / powOf10(scale - 2);
+        return Math.round((double)unscaledValue / powOf10(scale - 2));
     }
 
     @VisibleForTesting

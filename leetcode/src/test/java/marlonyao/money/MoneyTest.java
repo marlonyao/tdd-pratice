@@ -81,7 +81,7 @@ public class MoneyTest {
         assertThat(Money.fromYuan("1.2").toCents()).isEqualTo(120L);
         assertThat(Money.fromYuan("1.231").toCents()).isEqualTo(123L);
         // TODO: may need to be fixed
-//        assertThat(Money.fromYuan("1.236").toCents()).isEqualTo(124L);
+        assertThat(Money.fromYuan("1.236").toCents()).isEqualTo(124L);
     }
 
     @Test
