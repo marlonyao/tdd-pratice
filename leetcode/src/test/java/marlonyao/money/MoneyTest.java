@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static marlonyao.money.Money.powOf10;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.offset;
+import static org.assertj.core.api.Assertions.*;
 
 public class MoneyTest {
     @Test
@@ -28,6 +27,14 @@ public class MoneyTest {
         Money money = Money.fromYuan(new BigDecimal("1.2"));
         assertThat(money.getScale()).isEqualTo(1);
         assertThat(money.getUnscaledValue()).isEqualTo(12);
+    }
+
+    @Test
+    public void should_scale_not_be_larger_than_9() {
+        assertThatThrownBy(() -> Money.fromYuan("0.1234567891"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Scale should not be larger than 9 but actual 10");
+
     }
 
     @Test
@@ -87,5 +94,23 @@ public class MoneyTest {
     @Test
     public void should_convert_to_double() {
         assertThat(Money.fromYuan("1.23").toDouble()).isCloseTo(1.23, offset(1e-6));
+    }
+    
+    @Test
+    public void should_money_divide() {
+        Money money = Money.fromYuan("1.2").divide(3, 2);
+        assertThat(money).isEqualByComparingTo(Money.fromYuan("0.4"));
+
+        money = Money.fromYuan("1.0").divide(3, 2);
+        assertThat(money).isEqualByComparingTo(Money.fromYuan("0.33"));
+
+        money = Money.fromYuan("2").divide(3, 2);
+        assertThat(money).isEqualByComparingTo(Money.fromYuan("0.67"));
+
+        money = Money.fromYuan("1.00").divide(3, 1);
+        assertThat(money).isEqualByComparingTo(Money.fromYuan("0.3"));
+
+        money = Money.fromYuan("2.00").divide(3, 1);
+        assertThat(money).isEqualByComparingTo(Money.fromYuan("0.7"));
     }
 }
