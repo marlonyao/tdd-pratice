@@ -87,7 +87,6 @@ public class MoneyTest {
     public void should_convert_to_cents() {
         assertThat(Money.fromYuan("1.2").toCents()).isEqualTo(120L);
         assertThat(Money.fromYuan("1.231").toCents()).isEqualTo(123L);
-        // TODO: may need to be fixed
         assertThat(Money.fromYuan("1.236").toCents()).isEqualTo(124L);
     }
 
