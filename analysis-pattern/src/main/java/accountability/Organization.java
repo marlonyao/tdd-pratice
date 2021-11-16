@@ -1,9 +1,16 @@
 package accountability;
 
-import com.google.common.base.MoreObjects;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Organization extends Party {
-    public Organization(String name, TelephoneNumber phone, Address address, Email email) {
-        super(name, phone, address, email);
+public abstract class Organization {
+    private List<Organization> subsidiaries = new ArrayList<>();
+
+    public void addSubsidiary(Organization subsidiary) {
+        subsidiaries.add(subsidiary);
+    }
+
+    public List<Organization> getSubsidiaries() {
+        return subsidiaries;
     }
 }

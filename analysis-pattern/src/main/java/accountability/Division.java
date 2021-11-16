@@ -1,16 +1,11 @@
 package accountability;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Division {
-    private List<SalesOffice> salesOffices = new ArrayList<>();
-
-    public void addSalesOffice(SalesOffice salesOffice) {
-        salesOffices.add(salesOffice);
-    }
-
-    public List<SalesOffice> getSalesOffices() {
-        return salesOffices;
+public class Division extends Organization {
+    @Override
+    public void addSubsidiary(Organization subsidiary) {
+        if (!(subsidiary instanceof SalesOffice)) {
+            throw new IllegalArgumentException("Can only add SalesOffice for Division");
+        }
+        super.addSubsidiary(subsidiary);
     }
 }

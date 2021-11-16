@@ -1,16 +1,11 @@
 package accountability;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class OperatingUnit {
-    private List<Region> regions = new ArrayList<>();
-
-    public void addRegion(Region region) {
-        regions.add(region);
-    }
-
-    public List<Region> getRegions() {
-        return regions;
+public class OperatingUnit extends Organization {
+    @Override
+    public void addSubsidiary(Organization subsidiary) {
+        if (!(subsidiary instanceof Region)) {
+            throw new IllegalArgumentException("Can only add Region for OperatingUnit");
+        }
+        super.addSubsidiary(subsidiary);
     }
 }
