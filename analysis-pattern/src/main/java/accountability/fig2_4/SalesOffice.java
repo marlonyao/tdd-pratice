@@ -1,4 +1,4 @@
-package accountability;
+package accountability.fig2_4;
 
 public class SalesOffice extends Organization {
     @Override

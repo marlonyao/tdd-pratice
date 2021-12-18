@@ -1,5 +1,10 @@
-package accountability;
+package accountability.fig2_4;
 
+import accountability.fig2_4.Division;
+import accountability.fig2_4.OperatingUnit;
+import accountability.fig2_4.Organization;
+import accountability.fig2_4.Region;
+import accountability.fig2_4.SalesOffice;
 import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.Test;
 

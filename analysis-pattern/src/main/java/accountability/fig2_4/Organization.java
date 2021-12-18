@@ -1,4 +1,4 @@
-package accountability;
+package accountability.fig2_4;
 
 import java.util.ArrayList;
 import java.util.List;

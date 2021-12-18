@@ -1,4 +1,4 @@
-package accountability;
+package accountability.fig2_1;
 
 import com.google.common.base.MoreObjects;
 
